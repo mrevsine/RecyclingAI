@@ -1,0 +1,11 @@
+item	recyclable
+aerosol cans	1
+battery	0
+clamshell container	0
+construction paper	1
+envelope	1
+glass bottle	1
+glass cup	0
+napkins	0
+pizza box	0
+plastic bottle	1
