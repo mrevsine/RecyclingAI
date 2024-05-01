@@ -30,14 +30,24 @@ function Main1Container() {
 
     const images = [
         '/plastic_bottle.jpeg',
+        '/plastic_bottle.jpeg',
+        '/battery.jpeg',
         '/battery.jpeg',
         '/glass_bottle.jpeg',
+        '/glass_bottle.jpeg',
         '/glass_cup.jpeg',
-        '/pizza_box.jpeg', 
+        '/glass_cup.jpeg',
+        '/pizza_box.jpeg',
+        '/pizza_box.jpeg',  
+        '/clamshell_container.jpeg',
         '/clamshell_container.jpeg',
         '/aerosol_cans.jpeg',
+        '/aerosol_cans.jpeg',
+        '/envelope.jpeg',
         '/envelope.jpeg',
         '/construction_paper.jpeg',
+        '/construction_paper.jpeg',
+        '/napkins.jpeg',
         '/napkins.jpeg'
     ]
    
@@ -45,6 +55,36 @@ function Main1Container() {
 
     const nextImg = () => {
         setCurImg((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0)
+    }
+
+
+    const AI_text = [
+        "",
+        "AI prediction/explanation 1",
+        "",
+        "AI prediction/explanation 2",
+        "",
+        "AI prediction/explanation 3",
+        "",
+        "AI prediction/explanation 4",
+        "",
+        "AI prediction/explanation 5",
+        "",
+        "AI prediction/explanation 6",
+        "",
+        "AI prediction/explanation 7",
+        "",
+        "AI prediction/explanation 8",
+        "",
+        "AI prediction/explanation 9",
+        "",
+        "AI prediction/explanation 10",
+    ]
+
+    const [curText, setCurText] = useState(0);
+
+    const nextText = () => {
+        setCurText((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0)
     }
 
 
@@ -143,11 +183,12 @@ function Main1Container() {
     const yesButtonActions = () => {
         subDataToDbYes();
         nextImg();
+        nextText();
     };
 
     const noButtonActions = () => {
         subDataToDbNo();
-        nextImg();
+        nextText();
     };
 
     {/*recycle*/}
@@ -293,7 +334,11 @@ function Main1Container() {
 
 
             <img src={images[curImg]} alt = "item"/> {/*place this where ever you want, it is connected to the below buttons*/}
+            
 
+            <div>
+            <t> {AI_text[curText]} </t>
+            </div>
 
             <div className="button-container-yes"> 
                 <Button style={{}}  onClick={yesButtonActions}>
