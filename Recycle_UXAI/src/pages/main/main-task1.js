@@ -26,6 +26,32 @@ function Main1Container() {
     let totalImages = 3;
     const baseImgUrl = "./";
 
+    /*new code for recycleAI*/
+
+    const images = [
+        '/aerosol_cans.jpeg',
+        '/battery.jpeg',
+        '/clamshell_container.jpeg',
+        '/construction_paper.jpeg',
+        '/envelope.jpeg',
+        '/glass_bottle.jpeg',
+        '/glass_cup.jpeg',
+        '/napkins.jpeg',
+        '/pizza_box.jpeg',
+        '/plastic_bottle.jpeg'     
+    ]
+   
+    const [curImg, setCurImg] = useState(0);
+
+    const nextImg = () => {
+        setCurImg((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0)
+    }
+
+
+
+    /*end new code for recycleAI */
+
+
     const nextChange = () =>{
         /*if (choice<1) {
             alert("Please make sure to complete all the fields!");
@@ -113,6 +139,16 @@ function Main1Container() {
             console.error('Error deleting all data:', error);
         });
     }
+
+    const yesButtonActions = () => {
+        subDataToDbYes();
+        nextImg();
+    };
+
+    const noButtonActions = () => {
+        subDataToDbNo();
+        nextImg();
+    };
 
     {/*recycle*/}
 
@@ -254,14 +290,19 @@ function Main1Container() {
             </div>    
 
             {/*recycle*/}
+
+
+            <img src={images[curImg]} alt = "item"/> {/*place this where ever you want, it is connected to the below buttons*/}
+
+
             <div className="button-container-yes"> 
-                <Button style={{}}  onClick={subDataToDbYes}>
+                <Button style={{}}  onClick={yesButtonActions}>
                     Yes
                 </Button>
             </div>
 
             <div className="button-container-no"> 
-                <Button style={{}}  onClick={subDataToDbNo}>
+                <Button style={{}}  onClick={noButtonActions}>
                     No
                 </Button>
             </div>
