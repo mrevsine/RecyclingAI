@@ -29,16 +29,16 @@ function Main1Container() {
     /*new code for recycleAI*/
 
     const images = [
-        '/aerosol_cans.jpeg',
+        '/plastic_bottle.jpeg',
         '/battery.jpeg',
-        '/clamshell_container.jpeg',
-        '/construction_paper.jpeg',
-        '/envelope.jpeg',
         '/glass_bottle.jpeg',
         '/glass_cup.jpeg',
-        '/napkins.jpeg',
-        '/pizza_box.jpeg',
-        '/plastic_bottle.jpeg'     
+        '/pizza_box.jpeg', 
+        '/clamshell_container.jpeg',
+        '/aerosol_cans.jpeg',
+        '/envelope.jpeg',
+        '/construction_paper.jpeg',
+        '/napkins.jpeg'
     ]
    
     const [curImg, setCurImg] = useState(0);
