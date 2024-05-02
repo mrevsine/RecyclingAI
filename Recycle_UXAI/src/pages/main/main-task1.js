@@ -1,32 +1,26 @@
-import React, { Component, useState, useEffect } from "react";
-import {Button, Modal, Checkbox, Input, Radio} from 'antd'
+import React, { useState, useEffect } from "react";
+import { Button } from 'antd';
 import "antd/dist/antd.css";
 import "./main.css";
-import Popup from 'reactjs-popup';
-
-import PredictionContainer from '../../components/predictionContainer'
 
 function Main1Container() {
     const [text, setText] = useState("");
-    const [task, setTask] = useState(0);
-    const [choice, setChoice] = useState(0);
     const [tmpUser, setTmpUser] = useState(0);
     const [imageData, setImageData] = useState([]);
     const [currentImage, setCurrentImage] = useState("");
-    const [currentPrediction, setCurrentPrediction] = useState("");
     const [imageCount, setImageCount] = useState(0);
-    const [showPrediction, setShowPrediction] = useState(false);
-    const [taskTime, setTaskTime] = useState((Date.now() + 1000 * 1000));
-
-    const [currentTime, setCurrentTime] = useState(0);
-    const [moveToSurvey, setMoveToSurvey] = useState(false);
-
     const [render, setRender] = useState(false);
+    const [textData, setTextData] = useState([]);
+    const [choice, setChoice] = useState(0);
+    const [taskTime, setTaskTime] = useState((Date.now() + 1000 * 1000));
+    const [showPrediction, setShowPrediction] = useState(false);
+    const [choiceMade, setChoiceMade] = useState(false);
+    const [showButtons, setShowButtons] = useState(true); // New state variable
+    const [showRightContainer, setShowRightContainer] = useState(true);
+    const [nextImageCount, setNextImageCount] = useState(0);
+    const [buttonClickCount, setButtonClickCount] = useState(0); // New state variable
 
     let totalImages = 3;
-    const baseImgUrl = "./";
-
-    /*new code for recycleAI*/
 
     const images = [
         '/plastic_bottle.jpeg',
@@ -47,96 +41,72 @@ function Main1Container() {
         '/envelope.jpeg',
         '/construction_paper.jpeg',
         '/construction_paper.jpeg',
-        '/napkins.jpeg',
         '/napkins.jpeg'
-    ]
-   
-    const [curImg, setCurImg] = useState(0);
-
-    const nextImg = () => {
-        setCurImg((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0)
-    }
-
+    ];
 
     const AI_text = [
         "",
-        "AI prediction/explanation 1",
+        "/item_descriptions/plastic_bottle.txt",
         "",
-        "AI prediction/explanation 2",
+        "/item_descriptions/battery.txt",
         "",
-        "AI prediction/explanation 3",
+        "/item_descriptions/glass_bottle.txt",
         "",
-        "AI prediction/explanation 4",
+        "/item_descriptions/glass_cup.txt",
         "",
-        "AI prediction/explanation 5",
+        "/item_descriptions/pizza_box.txt",
         "",
-        "AI prediction/explanation 6",
+        "/item_descriptions/clamshell_container.txt",
         "",
-        "AI prediction/explanation 7",
+        "/item_descriptions/aerosol_cans.txt",
         "",
-        "AI prediction/explanation 8",
+        "/item_descriptions/envelope.txt",
         "",
-        "AI prediction/explanation 9",
+        "/item_descriptions/construction_paper.txt",
         "",
-        "AI prediction/explanation 10",
-    ]
+        "/item_descriptions/napkins.txt",
+    ];
 
+    const [curImg, setCurImg] = useState(0);
     const [curText, setCurText] = useState(0);
 
+    const nextImg = () => {
+        setCurImg((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0);
+    };
+
     const nextText = () => {
-        setCurText((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0)
-    }
-
-
-
-    /*end new code for recycleAI */
-
+        setCurText((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0);
+    };
 
     const nextChange = () =>{
-        /*if (choice<1) {
-            alert("Please make sure to complete all the fields!");
-        } else {*/
-            let count = imageCount + 1;
-            // save data
-            let data = {
-                q_id: currentImage,
-                user_id: tmpUser,
-                ans: choice,
-                input: text, 
-                time: ((Date.now() - taskTime) / 1000).toFixed(3)
-            };
-            console.log(data)
-            sendData(data)
-            if (count >= totalImages) {
-                console.log('done with images')
-                setMoveToSurvey(true);
-            } else {
-                // reinitialize variables
-                setChoice(0); 
-                setText("")
-                setImageCount(count);
-                setCurrentImage(imageData[count].name);
-                setCurrentPrediction(imageData[count].label);
-                setTaskTime(Date.now())
-                setShowPrediction(false);
-            }
-        //}
-    }
+        let count = imageCount + 1;
+        if (count >= totalImages) {
+            console.log('done with images');
+        } else {
+            setChoice(0); 
+            setText("");
+            setImageCount(count);
+            setCurrentImage(imageData[count].name);
+            setTaskTime(Date.now());
+            setShowPrediction(false);
+            setChoiceMade(false); // Reset choiceMade state
+            setShowButtons(true); // Show buttons again
+        }
+    };
 
     const subDataToDb = () =>{
-            // save data
-            let data = {
-                q_id: "Recycle or Not",
-                user_id: tmpUser,
-                ans: choice,
-                input: text, 
-                time: ((Date.now() - taskTime) / 1000).toFixed(3)
-            };
-            console.log(data)
-            sendData(data)
-    }
+        // save data
+        let data = {
+            q_id: "Recycle or Not",
+            user_id: tmpUser,
+            ans: choice,
+            input: text, 
+            time: ((Date.now() - taskTime) / 1000).toFixed(3)
+        };
+        console.log(data)
+        sendData(data)
+    };
 
-    {/*recycle*/}
     const subDataToDbYes = () =>{
         // save data
         let data = {
@@ -148,7 +118,7 @@ function Main1Container() {
         };
         console.log(data)
         sendData(data)
-    }
+    };
 
     const subDataToDbNo = () =>{
         // save data
@@ -161,10 +131,54 @@ function Main1Container() {
         };
         console.log(data)
         sendData(data)
-    }
+    };
+
+    const yesButtonActions = () => {
+        subDataToDbYes();
+        nextImg();
+        nextText();
+        setChoiceMade(true);
+        setShowButtons(false); // Hide buttons after choice
+        setButtonClickCount((prevCount) => prevCount + 1);
+        setNextImageCount((prevCount) => prevCount + 1);
+        setShowRightContainer(true);
+    };
+
+    const noButtonActions = () => {
+        subDataToDbNo();
+        nextImg();
+        nextText();
+        setChoiceMade(true);
+        setShowButtons(false); // Hide buttons after choice
+        setButtonClickCount((prevCount) => prevCount + 1);
+        setNextImageCount((prevCount) => prevCount + 1);
+        setShowRightContainer(true);
+    };
+
+    const yesButtonActions2 = () => {
+        subDataToDbYes();
+        nextImg();
+        nextText();
+        setChoiceMade(true);
+        setShowButtons(true); // Hide buttons after choice
+        setButtonClickCount((prevCount) => prevCount + 1);
+        setNextImageCount((prevCount) => prevCount + 1);
+        setShowRightContainer(false);
+    };
+
+    const noButtonActions2 = () => {
+        subDataToDbNo();
+        nextImg();
+        nextText();
+        setChoiceMade(true);
+        setShowButtons(true); // Hide buttons after choice
+        setButtonClickCount((prevCount) => prevCount + 1);
+        setNextImageCount((prevCount) => prevCount + 1);
+        setShowRightContainer(false);
+    };
 
     const deleteAllData = () => {
-        fetch('http://localhost:8080/deleteAllData', {
+        fetch('http://localhost:8088/deleteAllData', {
             method: 'DELETE',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -172,36 +186,21 @@ function Main1Container() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data.message); // Log the response message
-            // Perform any additional actions after deleting all data
+            console.log(data.message);
         })
         .catch(error => {
             console.error('Error deleting all data:', error);
         });
-    }
-
-    const yesButtonActions = () => {
-        subDataToDbYes();
-        nextImg();
-        nextText();
     };
-
-    const noButtonActions = () => {
-        subDataToDbNo();
-        nextText();
-    };
-
-    {/*recycle*/}
 
     const routeChangeToStart = () =>{ 
         let path = '/#/'; 
-        // history.push(path);
         window.location.assign(path);
-        console.log('moving to home page')
-      }
+        console.log('moving to home page');
+    };
 
     const sendData = (obj) => {
-        fetch('http://localhost:8080/responsesData', {
+        fetch('http://localhost:8088/responsesData', {
           method: 'POST',
           body: JSON.stringify(obj),
           headers: {
@@ -209,168 +208,107 @@ function Main1Container() {
           }
         }).then(response => response.json())
           .then(message => {
-            console.log(message)
-          })
-      }
-      
-    
-
-
-    const onChangeMultiple= e => {
-        setChoice(e.target.value);
-
+            console.log(message);
+          });
     };
 
-    const onChangeInput = e => {
-        setText(e.target.value);
-    };
-
-    const handlePredict=()=>{
-        setShowPrediction(true);
-    };
-
-    // testing communication with backend
     useEffect(() => {
-        fetch('http://0.0.0.0:8080/time').then(res => 
-        res.json()).then(data => {
-            setCurrentTime(data.time);
-            console.log(data.time)
-        });
-        }, []);
+        const fetchData = async () => {
+            const textDataArray = [];
+            for (let i = 0; i < AI_text.length; i++) {
+                if (AI_text[i] !== "") {
+                    const response = await fetch(AI_text[i]);
+                    const text = await response.text();
+                    textDataArray.push(text);
+                } else {
+                    textDataArray.push("");
+                }
+            }
+            setTextData(textDataArray);
+        };
+        fetchData();
+    }, []);
 
-    // create a new user here 
     useEffect(() => {
-        fetch('http://localhost:8080/setup_main')
+        fetch('http://localhost:8088/setup_main')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            console.log(data['task_number']);
-            setTask(data['task_number']);
-            // send user id as well
-            setTmpUser(data['user_id'])
+            console.log(data);
+            setTmpUser(data['user_id']);
         });
     }, []);
-    
 
-    // initialize image
     useEffect(() => {
-        console.log('getting images')
-        fetch('http://localhost:8080/imageInfo')
+        fetch('http://localhost:8088/imageInfo')
         .then(response => response.json())
         .then(data => {
             console.log(data['imgs']);
             setImageData(data['imgs']);
-            let image_name = data['imgs'][0].name
-            setCurrentImage(image_name)
-            console.log(image_name)
-            setCurrentPrediction(data['imgs'][0].label);
+            let image_name = data['imgs'][0].name;
+            setCurrentImage(image_name);
+            console.log(image_name);
             setRender(true);
-            setTaskTime(Date.now())
         });
     }, []);
 
-
-
     return (
-      <>
-       {render ?
-
-            <div className="page-container">
-            <div className="head-text">Recycle or Not?</div>
-            <div className="column-container"> 
-            <div className="left-column"> 
-                <div className="popup-button-container">
-                    <img src={require('./Mexican_Wolf_Input_Image_1.jpg')}/>
-                    
-                    <Popup trigger=
-                    {<Button className="btn-muzzle" size = "xs"> </Button>}
-                    position="absolute">
-                    <div className="popup">Thick muzzle</div>
-                    </Popup>
-
-                    <Popup trigger=
-                    {<Button className="btn-coat" size = "xs">  </Button>}
-                    position="absolute">
-                    <div className="popup">Buff, gray, and rust colored fur</div>
-                    </Popup>
+        <>
+            {render ?
+                <div className="page-container">
+                    <div className="head-text">Is this recyclable?</div>
+                    <div className="bgrd-container">
+                        <div className="left-container">
+                            <div className="image-container">
+                                <img src={images[curImg]} alt="item" />
+                                <h3 className="match-text">Select whether you think the item in the image can be recycled or not.</h3>
+                            </div>
+                            <div className="button-container">
+                                {showButtons && <div className="button-container-yes">
+                                    <Button onClick={yesButtonActions}>Yes</Button>
+                                </div>}
+                                {showButtons && <div className="button-container-no">
+                                    <Button onClick={noButtonActions}>No</Button>
+                                </div>}
+                            </div>
+                        </div>
+                        {choiceMade && showRightContainer && (
+                            <div className="right-container">
+                                <div className="prediction-cont">
+                                    <h3 className="prediction-text">Our model's recommendation:</h3>
+                                    <p className='AI_exp'>{textData[curText]}</p>
+                                </div>
+                                <div className="prediction-cont2">
+                                    <h3 className="question2"> Is your answer different after reading the recommendation?</h3>
+                                    <h3 className="AI_exp"> Answer again to the question: </h3>
+                                    <h3 className="question2"> Is the item in the image recyclable?</h3>
+                                    <div className="button-container">
+                                        <div className="button-container-yes">
+                                            <Button onClick={yesButtonActions2}>Yes</Button>
+                                        </div>
+                                        <div className="button-container-no">
+                                            <Button onClick={noButtonActions2}>No</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div className="button-container-nav"> 
+                        <Button style={{marginRight:"100%", marginBottom:"0%"}} onClick={routeChangeToStart}>
+                            Back
+                        </Button>
+                        <Button style={{marginLeft:"0%", marginBottom:"0%"}} onClick={deleteAllData}>
+                            Clear Database
+                        </Button>
+                    </div>
                 </div>
-            
-            </div>
-    
-
-            </div>
-            <p className="click-text">Click the yellow squares to inspect the image features.</p>
-            <h2 className="rank-text">Top Matches</h2>
-            <div className="bgrd-container">
-                <h3 className="match-text"> Best Match: 90%</h3>
-                <img src={require('./Best_Match_Mexican_Wolf.jpg')}/>
-                <div class="parent">
-                    <ul className="bullet-text">
-                        <li>Smaller subspecies </li>
-                        <li>Buff, gray, and rust colored coat</li>
-                        <li>Thick muzzle</li>
-                        <li>Mountain woodland environment</li>
-                    </ul> 
-                </div>
-            </div>
-        
-            <div className="bgrd-container">
-            <div className="user-input">
-                    <t> Enter the subspecies that matches your uploaded image:</t>
-            
-            <input
-                type="text"
-                value={text}
-                onChange={onChangeInput}
-            />
-
-            <div className="button-container"> 
-                <Button style={{marginLeft:"70%"}}  onClick={deleteAllData}> {/*changed from subDataToDb for recycle*/}
-                    Clear Database
-                </Button>
-            </div>    
-
-            {/*recycle*/}
-
-
-            <img src={images[curImg]} alt = "item"/> {/*place this where ever you want, it is connected to the below buttons*/}
-            
-
-            <div>
-            <t> {AI_text[curText]} </t>
-            </div>
-
-            <div className="button-container-yes"> 
-                <Button style={{}}  onClick={yesButtonActions}>
-                    Yes
-                </Button>
-            </div>
-
-            <div className="button-container-no"> 
-                <Button style={{}}  onClick={noButtonActions}>
-                    No
-                </Button>
-            </div>
-            {/*recycle*/}
-
-            </div>
-
-            <div className="button-container"> 
-                <Button style={{marginLeft:"70%", marginBottom:"5%"}}  onClick={routeChangeToStart}>
-                    Back
-                </Button>
-            </div>
-
-            </div>
-            </div>
-        :
-            <> 
-            <h1> Loading ...</h1>
-            </>
-        }
-      </>
-       
-      );
+                :
+                <> 
+                    <h1> Loading ...</h1>
+                </>
+            }
+        </>
+    );
 }
 
 export default Main1Container;
