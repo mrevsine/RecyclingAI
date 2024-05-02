@@ -178,7 +178,7 @@ function Main1Container() {
     };
 
     const deleteAllData = () => {
-        fetch('http://localhost:8088/deleteAllData', {
+        fetch('http://localhost:8080/deleteAllData', {
             method: 'DELETE',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -200,7 +200,7 @@ function Main1Container() {
     };
 
     const sendData = (obj) => {
-        fetch('http://localhost:8088/responsesData', {
+        fetch('http://localhost:8080/responsesData', {
           method: 'POST',
           body: JSON.stringify(obj),
           headers: {
@@ -230,7 +230,7 @@ function Main1Container() {
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:8088/setup_main')
+        fetch('http://localhost:8080/setup_main')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -239,7 +239,7 @@ function Main1Container() {
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:8088/imageInfo')
+        fetch('http://localhost:8080/imageInfo')
         .then(response => response.json())
         .then(data => {
             console.log(data['imgs']);
