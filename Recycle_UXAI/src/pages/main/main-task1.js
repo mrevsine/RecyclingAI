@@ -29,6 +29,8 @@ function Main1Container() {
         '/battery.jpeg',
         '/glass_bottle.jpeg',
         '/glass_bottle.jpeg',
+        '/construction_paper.jpeg',
+        '/construction_paper.jpeg',
         '/glass_cup.jpeg',
         '/glass_cup.jpeg',
         '/pizza_box.jpeg',
@@ -39,8 +41,7 @@ function Main1Container() {
         '/aerosol_cans.jpeg',
         '/envelope.jpeg',
         '/envelope.jpeg',
-        '/construction_paper.jpeg',
-        '/construction_paper.jpeg',
+        '/napkins.jpeg',
         '/napkins.jpeg'
     ];
 
@@ -52,6 +53,8 @@ function Main1Container() {
         "",
         "/item_descriptions/glass_bottle.txt",
         "",
+        "/item_descriptions/construction_paper.txt",
+        "",
         "/item_descriptions/glass_cup.txt",
         "",
         "/item_descriptions/pizza_box.txt",
@@ -61,8 +64,6 @@ function Main1Container() {
         "/item_descriptions/aerosol_cans.txt",
         "",
         "/item_descriptions/envelope.txt",
-        "",
-        "/item_descriptions/construction_paper.txt",
         "",
         "/item_descriptions/napkins.txt",
     ];
@@ -100,7 +101,7 @@ function Main1Container() {
     const subDataToDb = () =>{
         // save data
         let data = {
-            q_id: "Recycle or Not",
+            q_id: curImg,
             user_id: tmpUser,
             ans: choice,
             input: text, 
@@ -299,9 +300,6 @@ function Main1Container() {
                     <div className="button-container-nav"> 
                         <Button style={{marginRight:"100%", marginBottom:"0%"}} onClick={routeChangeToStart}>
                             Back to start
-                        </Button>
-                        <Button style={{marginLeft:"0%", marginBottom:"0%"}} onClick={deleteAllData}>
-                            Clear Database
                         </Button>
                     </div>
                 </div>

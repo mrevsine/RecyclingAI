@@ -35,6 +35,22 @@ function StartContainer() {
         window.location.assign(path);
     }
 
+    const deleteAllData = () => {
+        fetch('http://localhost:8080/deleteAllData', {
+            method: 'DELETE',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error deleting all data:', error);
+        });
+    };
+
     
 
     // connect with the backend to randomize the task 
@@ -68,11 +84,21 @@ function StartContainer() {
 
         
         {/*want to clear databse for recycle, action broke?*/}
+        
         <div className="upload-button"> 
             <Button onClick={routeChange_toinstr}>
                 Start
             </Button>
         </div>
+
+
+
+
+
+
+        <Button style={{marginLeft:"50%", marginBottom:"150%"}} onClick={deleteAllData}>
+            Clear Database
+        </Button>
 
       </div>
       );
