@@ -61,9 +61,9 @@ function StartContainer() {
         Have you ever been confused on if you can recycle an object or not? If so, this website is made for you!
         </div> */}
         
-        <div className="logo">
+        <div className="logo-container">
            
-            <img src={"./recycle-2.png"} />
+            <img src={"./recycle-2.png"} className = "logo"/>
         </div>
 
         

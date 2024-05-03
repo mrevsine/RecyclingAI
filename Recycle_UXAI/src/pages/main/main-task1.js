@@ -71,6 +71,9 @@ function Main1Container() {
     const [curText, setCurText] = useState(0);
 
     const nextImg = () => {
+        // let count = imageCount + 1;
+        // if (count >= totalImages) {
+        //     console.log('done with images');
         setCurImg((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0);
     };
 
