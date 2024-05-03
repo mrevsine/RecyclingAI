@@ -34,14 +34,22 @@ t {
 }
 
 .button-container {
-    display: inline-block;
-    padding: 4px 4px;
-    width: 75%;
-    margin-top: 20px;
-    margin-left: 13%;
-    
-  }
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the buttons horizontally */
+    margin-top: 10px; /* Add margin-top for spacing */
+}
 
+.button-container-nav {
+    display: flex;
+    justify-content: space-between; /* Place the buttons at each end of the container */
+    width: 70%; /* Ensure the container spans the entire width */
+    position: absolute; /* Position the container relative to its closest positioned ancestor */
+    bottom: 10%; /* Position the container 10px from the bottom of its containing element */
+}
+
+.button-container button {
+    margin-bottom: 0; /* Remove any bottom margin applied to the buttons */
+}
 
 .btn-1{
     margin-top: 10px;
@@ -113,21 +121,39 @@ t {
     position: absolute;
 }
 
-.prediction-container{
-    text-align: left;
-    font-size: 16px;
-    width: 75%;
-    background-color: rgba(216, 160, 55, 0.632);
+.prediction-text{
+    font-size: 30px;
     margin-bottom: 10px;
     margin-top: 10px;
+    margin-right: 10px;
 }
 
-.button-container {
-    padding: 4px 4px;
-    margin-top: 5%;
-    margin-left: 13%;
-    display: inline-block;
-    
+.question2{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-weight: bold; 
+}
+
+.prediction-cont {
+    text-align: center;
+    font-size: 16px;
+    background-color: #ffffff; /* Set background color to white */
+    flex: 1; /* Take up remaining space */
+    margin-right: 30%; /* Add margin to the right side */
+    margin-top: 10%; /* Add margin to the top */
+    border: 3px solid rgb(129, 180, 181); /* Add a solid blue border */
+    border-radius: 5px; /* Add border radius for rounded corners */
+}
+
+.prediction-cont2 {
+    text-align: center;
+    font-size: 16px;
+    background-color: #ffffff; /* Set background color to white */
+    flex: 1; /* Take up remaining space */
+    margin-right: 30%; /* Add margin to the right side */
+    margin-top: 5%; /* Add margin to the top */
 }
 
 .button-container-yes {
@@ -136,6 +162,7 @@ t {
     margin-left: 13%;
     display: inline-block;
     background-color: rgb(108, 209, 108);
+    margin: 1% 5%;
 }
 
 .button-container-no {
@@ -144,17 +171,12 @@ t {
     margin-left: 13%;
     display: inline-block;
     background-color: rgb(255, 0, 10);
+    margin: 1% 5%;
 }
 
 .instr{
     margin-top: 20px;
     width: 80%;
-}
-
-.pop-container{
-    margin-left: 5%;
-    width: 100%;
-    height: 80%
 }
 
 .parent {
@@ -168,94 +190,45 @@ t {
     margin-right: 70%;
 }
 
-.popup-btn-muzzle{
-    font-size: 20px;
-}
-
-
-
-.popup-button-container {
-    position: relative;
-    width: 50%;
-}
-
-
-
-.popup-button-container .btn-muzzle {
-    position: absolute;
-    top: 50%;
-    left: 63%;
-    bottom: 50%;
-    right: 50%;
-    background-color: #f8f53cfb;
-    color: white;
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.popup-button-container  .btn-muzzle:hover {
-    background-color: #dfdd84fb;
-}
-
-.popup-button-container .btn-coat {
-    position: absolute;
-    top: 40%;
-    left: 40%;
-    bottom: 60%;
-    right: 50%;
-    background-color: #f8f53cfb;
-    color: white;
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.popup-button-container  .btn-coat:hover {
-    background-color: #dfdd84fb;
-}
-
-.popup-button-container .btn-enviro {
-    position: absolute;
-    top: 15%;
-    left: 170%;
-    bottom: 85%;
-    right: 50%;
-    background-color: #f8f53cfb;
-    color: white;
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.popup-button-container  .btn-enviro:hover {
-    background-color: #dfdd84fb;
-}
-
-.popup{
-    background-color: rgb(248, 179, 51);
-    
-}
-
-.bgrd-container{
-    background-color:#8bcf84;
+.bgrd-container {
+    display: flex;
+    justify-content: space-between; /* Add space between left and right containers */
+    background-color: #ffffff;
+    width: 100%; 
 }
 
 .page-container{
-    background-color: #8bcf84;
-    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Align elements to the left side */
+    background-color: #ffffff;
 }
 
-.head-text{
-    font-weight: bold;
-    color: #382607;
-    font-size:xx-large;
+.left-container {
+    flex: 1; /* Take up remaining space */
+    padding-right: 20px; /* Add spacing between left container and right container */
+}
+
+.right-container {
+    flex: 1; /* Take up remaining space */
+}
+
+.image-container {
+    margin-bottom: 20px; /* Add spacing between image and buttons */
+}
+
+.head-text {
+    margin-right: auto; /* Move head-text to the left side */
+    align-self: flex-start; /* Align head-text to the left */
+    margin-top: 10px; /* Add margin-top to bring it closer to the center vertically */
+    margin-left: auto; /* Add left margin to separate head-text from the left margin */
+}
+
+.AI_exp{
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 20px;
 }
 
 .bullet-text{
@@ -281,5 +254,4 @@ t {
 .click-text{
     font-weight: bold;
 }
-
 

@@ -1,0 +1,11 @@
+image	label	recyclability	AI_label	AI_recyclability
+plastic_bottle.jpeg	plastic bottle	T	plastic bottle	T
+battery.jpeg	battery	F	battery	F
+glass_bottle.jpeg	glass bottle	T	glass bottle	T
+glass_cup.jpeg	glass cup	F	glass cup	F
+pizza_box.jpeg	dirty pizza box	F	clean pizza box	T
+clamshell_container.jpeg	clamshell container	F	clamshell container	F
+aerosol_cans.jpeg	aerosol cans	T	aerosol cans	T
+envelope.jpeg	envelope	T	envelope	T
+construction_paper.jpeg	construction paper	T	napkins	F
+napkins.jpeg	napkins	F	construction paper	T
