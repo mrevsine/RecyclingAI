@@ -71,6 +71,9 @@ function Main1Container() {
     const [curText, setCurText] = useState(0);
 
     const nextImg = () => {
+        // let count = imageCount + 1;
+        // if (count >= totalImages) {
+        //     console.log('done with images');
         setCurImg((prevIndex) => (prevIndex + 1) < images.length ? (prevIndex + 1) : 0);
     };
 
@@ -295,7 +298,7 @@ function Main1Container() {
                     </div>
                     <div className="button-container-nav"> 
                         <Button style={{marginRight:"100%", marginBottom:"0%"}} onClick={routeChangeToStart}>
-                            Back
+                            Back to start
                         </Button>
                         <Button style={{marginLeft:"0%", marginBottom:"0%"}} onClick={deleteAllData}>
                             Clear Database
