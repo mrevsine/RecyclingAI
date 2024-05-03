@@ -11,24 +11,29 @@ function StartContainer() {
         setAgree(!agree);
     }
 
-    const routeChange = () =>{ 
-        if (task % 2 === 0) {
-            let path = '/#/Main2'; 
-            window.location.assign(path);
-        } else {
-            let path = '/#/Main1'; 
-            window.location.assign(path);
-        }
+    // const routeChange = () =>{ 
+    //     if (task % 2 === 0) {
+    //         let path = '/#/Main2'; 
+    //         window.location.assign(path);
+    //     } else {
+    //         let path = '/#/Main1'; 
+    //         window.location.assign(path);
+    //     }
 
 
-    }
+    // }
+
+    const routeChange_toinstr = () =>{ 
+        let path = '/#/Instructions'; 
+        // history.push(path);
+        window.location.assign(path);
+        console.log('moving to instructions page')
+      }
 
     const routeChangeToMain1 = () =>{    
         let path = '/#/Main1'; 
         window.location.assign(path);
     }
-
-    
 
     
 
@@ -50,21 +55,21 @@ function StartContainer() {
     return (
       <div className="page-container">
         
-        <h1 className="head-text">Homepage</h1> 
+        <h1 className="head-text">RecycleAI</h1> 
 
         <div className="text"> 
-        This website...
+        Have you ever been confused on if you can recycle an object or not? If so, this website is made for you!
         </div>
         
         <div className="instructions-head">
-            <h2 className="req-text"> Requirments for Uploading Images</h2>
+            <h2 className="req-text"> Requirements for Uploading Images</h2>
         </div>
 
         <div className="image-instructions">
     
             <div className="text"> 
                 <ul>
-                    <li>bullet point</li>
+                    <li>Please upload a picture of the object under proper lighting conditions and it is clearly visible.</li>
                     <li>bullet point</li>
                 </ul> 
             </div>
@@ -72,8 +77,8 @@ function StartContainer() {
         
         {/*want to clear databse for recycle, action broke?*/}
         <div className="upload-button"> 
-            <Button onClick={routeChangeToMain1}>
-                To Task
+            <Button onClick={routeChange_toinstr}>
+                Start
             </Button>
         </div>
 
