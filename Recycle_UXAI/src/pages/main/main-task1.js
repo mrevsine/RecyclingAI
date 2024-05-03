@@ -295,7 +295,7 @@ function Main1Container() {
                     </div>
                     <div className="button-container-nav"> 
                         <Button style={{marginRight:"100%", marginBottom:"0%"}} onClick={routeChangeToStart}>
-                            Back
+                            Back to start
                         </Button>
                         <Button style={{marginLeft:"0%", marginBottom:"0%"}} onClick={deleteAllData}>
                             Clear Database

@@ -57,23 +57,15 @@ function StartContainer() {
         
         <h1 className="head-text">RecycleAI</h1> 
 
-        <div className="text"> 
+        {/* <div className="text"> 
         Have you ever been confused on if you can recycle an object or not? If so, this website is made for you!
-        </div>
+        </div> */}
         
-        <div className="instructions-head">
-            <h2 className="req-text"> Requirements for Uploading Images</h2>
+        <div className="logo">
+           
+            <img src={"./recycle-2.png"} />
         </div>
 
-        <div className="image-instructions">
-    
-            <div className="text"> 
-                <ul>
-                    <li>Please upload a picture of the object under proper lighting conditions and it is clearly visible.</li>
-                    <li>bullet point</li>
-                </ul> 
-            </div>
-        </div>
         
         {/*want to clear databse for recycle, action broke?*/}
         <div className="upload-button"> 
